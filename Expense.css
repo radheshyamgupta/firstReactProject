@@ -1,0 +1,30 @@
+
+*{
+   
+    margin: 0 px;
+    padding: 0px;
+}
+body{
+    background-color:aquamarine
+
+
+}
+.mydiv {
+    background-color: cadetblue;
+    height: 60px;
+    margin: 50px;
+    padding: 15px;
+    display: flex;
+    color: white;
+    font-weight: bold;
+    justify-content: space-around;
+  }
+ 
+  
+  .button{
+width: 10%;
+height: 25px;
+margin-top: 25px;
+  }
+
+

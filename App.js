@@ -1,25 +1,13 @@
 
-import ExpenseItem from './Component/ExpenseItem';
+import './App.css';
+import ExpenseItem from './ExpenseItem/ExpenseIte';
 function App() {
- const  expense=[
-  {
-  title:"Car insurance",
-  price:250,
-  date:new Date(2011,2,1),
-  location1:"mumbai"
- },
- {
-  title:"Bike insurance",
-  price:250,
-  date:new Date(2011,2,1),
-  location1:"kandivali"
- }
-]
-
+  const arr=[{title:"car insurance",price:250,location:"mumbai"},
+{title:"bike insurance", price:650,location:"kolkata"}]
   return (
-    <div >
-    <ExpenseItem title={expense[0].title} price={expense[0].price} location1={expense[0].location1} date={expense[0].date} ></ExpenseItem>
-    <ExpenseItem title={expense[1].title} price={expense[1].price} location1={expense[1].location1} date={expense[1].date} ></ExpenseItem>
+    <div className="App">
+      <ExpenseItem title={arr[0].title} price={arr[0].price} location={arr[0].location}></ExpenseItem>
+      <ExpenseItem title={arr[1].title} price={arr[1].price} location={arr[1].location}></ExpenseItem>
     </div>
   );
 }
