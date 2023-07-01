@@ -1,9 +1,5 @@
-.Form{
-    background-color: aqua;
-    margin-top: 10px;
-    height: 80px;
-    padding-top: 20px;
-}
-button{
-    margin-left: 5px ;
+form{
+    background-color: aliceblue;
+    justify-content: center;
+    align-items: center;
 }

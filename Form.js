@@ -1,63 +1,105 @@
 
-import "./Form.css";
 import React, { useState } from "react";
+import Display from "./Display/Display";
+import  "./Form.css"
+function Form() {
+  const [formInput, setFormInput] = useState("");
+  const [formNumber, setFormNumber] = useState("");
+  const [update, setUpdate] = useState([]);
+  const [emptyFieldError, setEmptyFieldError] = useState(false);
+  const [negativeNumberError, setNegativeNumberError] = useState(false);
+  const [ collage_nameInput ,setCollage_nameInput ]=useState("")
 
-function Form(props) {
-  const [inputTitle, setTitle] = useState("");
-  const [inputPrice, setPrice] = useState("");
-  const [inputLocation, setLocation] = useState("");
-  const [inputDate, setDate] = useState("");
-
-  function submitHandler(e) {
+  const formHandler = (e) => {
     e.preventDefault();
-    const submitData = {
-      title: inputTitle,
-      price: inputPrice,
-      location: inputLocation,
-      date: inputDate,
+    if (formInput === "" || formNumber === "" ||collage_nameInput ==="" ) {
+        setEmptyFieldError(true);
+        return;
+      }
+      if (formNumber < 0) {
+        setNegativeNumberError(true);
+        return;
+      }
+    const newItem = {
+      FormInput: formInput,
+      FormNumber: formNumber,
+       CollageName:collage_nameInput 
     };
-    props.onForm(submitData);
-    setTitle("");
-    setPrice("");
-    setLocation("");
-    setDate("");
-  }
+    setUpdate((prevUpdate) => [...prevUpdate, newItem]);
+    setFormInput("");
+    setFormNumber("");
+    setCollage_nameInput("")
+    setEmptyFieldError(false);
+    setNegativeNumberError(false)
 
-  const date = (e) => {
-    e.preventDefault();
-    setDate(e.target.value);
   };
+  
+  const handleCloseError = () => {
+    setFormInput("");
+    setFormNumber("");
+    setCollage_nameInput("");
+    setEmptyFieldError(false);
+    setNegativeNumberError(false)
+    
 
-  const title = (e) => {
-    e.preventDefault();
-    setTitle(e.target.value);
-  };
-
-  const price = (e) => {
-    setPrice(e.target.value);
-  };
-
-  const location = (e) => {
-    setLocation(e.target.value);
   };
 
   return (
-    <div className="Form">
-      <form onSubmit={submitHandler}>
-        <label htmlFor="title">Title</label>
-        <input type="text" id="input" value={inputTitle} onChange={title} />
-
-        <label htmlFor="price">Price</label>
-        <input type="number" id="price" value={inputPrice} onChange={price} />
-
-        <label htmlFor="location">Location</label>
-        <input type="text" value={inputLocation} onChange={location} />
-
-        <label htmlFor="date">Date</label>
-        <input type="date" value={inputDate} onChange={date} />
-
-        <button type="submit">ADD</button>
+    <div >
+      <form>
+        <div className="div">
+        <label forHtml="username"> Username</label>
+        <input
+          type="text"
+          name="formInput" 
+          id="username"
+          value={formInput}
+          onChange={(e) => setFormInput(e.target.value)}
+          required
+        />
+        <br/>
+         <label forHtml="collage_name"> collageName</label>
+         
+        <input
+          type="text"
+          name="collage_nameInput" 
+          id="collage_name"
+          value={collage_nameInput 
+        }
+          onChange={(e) => setCollage_nameInput(e.target.value)}
+          required
+        />
+        <br/>
+         <label forHtml="age">User(age)</label>
+        <input
+          type="number"
+          name="formNumber"
+          id="age"
+          value={formNumber}
+          onChange={(e) => setFormNumber(e.target.value)}
+          required
+        />
+         <br/>
+        <button onClick={formHandler}>Add</button>
+        </div>
       </form>
+      {emptyFieldError && (
+        <div>
+          <p>Please fill in all the fields.</p>
+          <button onClick={handleCloseError}>Close</button>
+        </div>
+      )}
+      {
+        negativeNumberError && (
+        
+            <div>
+              <p> negative number are not allowed Try once again</p>
+              <button onClick={handleCloseError}>Close</button>
+            </div>
+        )
+      }
+
+      <Display update={update} />
     </div>
   );
 }
